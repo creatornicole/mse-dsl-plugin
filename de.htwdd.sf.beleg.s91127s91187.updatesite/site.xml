@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<site>
+   <description name="s91127s91187" url="https://www.informatik.htw-dresden.de/~s91187/mse-beleg">
+      DSL of Students s91127 and s91187.
+   </description>
+   <feature url="features/de.htwdd.sf.beleg.s91127s91187.feature_1.0.0.202512181418.jar" id="de.htwdd.sf.beleg.s91127s91187.feature" version="1.0.0.202512181418"/>
+</site>

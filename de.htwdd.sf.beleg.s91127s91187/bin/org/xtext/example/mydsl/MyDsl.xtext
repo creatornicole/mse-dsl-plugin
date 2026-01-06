@@ -1,0 +1,48 @@
+grammar org.xtext.example.mydsl.MyDsl with org.eclipse.xtext.common.Terminals
+
+generate myDsl "http://www.xtext.org/example/mydsl/MyDsl"
+
+Model:
+	stories+=UserStory*;
+
+UserStory:
+	titel=Titel ':' 'Als' rolle=Rolle 'möchte' 'ich' ziel=Ziel ',' 'um' nutzen=Nutzen '.';
+
+Titel:
+	subjekt=SUBSTANTIV verb=INF_VERB;
+
+Rolle: 
+	subjekt=SUBSTANTIV;
+
+Ziel:
+	lchars=LOWER_SEQ? subjekt=SUBSTANTIV verb=INF_VERB;
+
+Nutzen:
+	subjekt=SUBSTANTIV verb=INF_ZU_VERB;
+
+// --------------------
+// Fragment-Terminals (nur Bausteine für Lexer)
+// werden zum "Zusammenbauen" von Terminals verwendet
+// --------------------
+terminal fragment LOWER: 'a'..'z' | 'ä' | 'ö' | 'ü';
+terminal fragment LOWER_NO_Z: 'a'..'y' | 'ä' | 'ö' | 'ü';
+terminal fragment LOWER_NO_ZU: LOWER_NO_Z | 'z' !'u';
+
+// --------------------
+// Terminals
+// --------------------
+terminal INF_ZU_VERB:
+	LOWER_NO_ZU* 'zuzu' LOWER_NO_ZU* GERMAN_VERBS_ENDING;
+
+terminal INF_VERB:
+	LOWER+ GERMAN_VERBS_ENDING;
+
+terminal SUBSTANTIV:
+	('A'..'Z' | 'Ä' | 'Ö' | 'Ü' ) ('a'..'z' | 'ä' | 'ö' | 'ü')*;
+
+terminal GERMAN_VERBS_ENDING:
+	'en' | 'ern' | 'eln';
+
+terminal LOWER_SEQ:
+    LOWER+;
+
